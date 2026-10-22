@@ -4,7 +4,10 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            require("pywal").setup()
+            -- pywal is optional: without ~/.cache/wal the theme falls back to tokyonight.
+            if require("ui_theme").has_pywal() then
+                require("pywal").setup()
+            end
             require("ui_theme").init()
         end,
     },

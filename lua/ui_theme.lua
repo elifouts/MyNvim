@@ -1,6 +1,13 @@
 local M = {}
 local state = require("settings_state")
 
+local wal_file = vim.fn.expand("~/.cache/wal/colors-wal.vim")
+local fallback = "tokyonight"
+
+function M.has_pywal()
+    return vim.fn.filereadable(wal_file) == 1
+end
+
 local function refresh_bars()
     vim.cmd("redrawstatus")
     local ok_lualine, lualine = pcall(require, "lualine")
@@ -54,19 +61,27 @@ local function set_colorscheme(theme)
     return true
 end
 
-function M.apply_theme(theme)
+-- persist = false applies a theme without remembering it (used for the pywal fallback).
+function M.apply_theme(theme, persist)
     if not set_colorscheme(theme) then
         return
     end
 
     vim.g.current_theme = theme
-    state.set("theme", theme)
+    if persist ~= false then
+        state.set("theme", theme)
+    end
     sync_lualine_theme("auto")
     refresh_bars()
 end
 
 function M.use_pywal()
-    vim.cmd("source ~/.cache/wal/colors-wal.vim")
+    if not M.has_pywal() then
+        vim.notify("pywal colors not found (run wal first), using " .. fallback, vim.log.levels.WARN)
+        M.apply_theme(fallback, false)
+        return
+    end
+    vim.cmd.source(wal_file)
 
     -- Prefer official colorscheme path so plugins listening to ColorScheme update.
     if not set_colorscheme("pywal") then
@@ -156,7 +171,9 @@ function M.init()
 
     vim.schedule(function()
         local startup_theme = state.get("theme", "pywal")
-        if startup_theme == "pywal" then
+        if startup_theme == "pywal" and not M.has_pywal() then
+            M.apply_theme(fallback, false)
+        elseif startup_theme == "pywal" then
             M.use_pywal()
         else
             M.apply_theme(startup_theme)

@@ -100,9 +100,14 @@ return {
             dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>"),
             dashboard.button("c", "  > Config", ":cd ~/.config/nvim | Telescope find_files<CR>"),
             dashboard.button("l", "󰒲 > Lazy", ":Lazy<CR>"),
-            dashboard.button("h", "  > Settings", ":cd ~/.config/hypr | Telescope find_files<CR>"),
             dashboard.button("q", "  > Quit", ":qa<CR>"),
         }
+
+        -- Hyprland settings shortcut, only on machines that have a hypr config
+        if vim.fn.isdirectory(vim.fn.expand("~/.config/hypr")) == 1 then
+            table.insert(dashboard.section.buttons.val, #dashboard.section.buttons.val,
+                dashboard.button("h", "  > Settings", ":cd ~/.config/hypr | Telescope find_files<CR>"))
+        end
 
         -- Footer
         dashboard.section.footer.val = { "", "Welcome!" }

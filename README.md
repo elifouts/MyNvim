@@ -24,10 +24,18 @@ Plugins install themselves on first launch.
 
 ## Needs
 
-- neovim 0.10+
+- neovim 0.12+
+- git (plugins and lazy.nvim install themselves on first launch)
 - a nerd font
-- git, ripgrep
-- [pywal16](https://github.com/eylles/pywal16) for the default colors, or switch with `:ThemeFileTokyo`, `:ThemeFileGruvbox`, `:ThemeFileNord`...
+
+Optional, for the parts that use them:
+
+- [pywal16](https://github.com/eylles/pywal16): colors from your wallpaper. Without it the theme is tokyonight, and `:ThemeFileGruvbox`, `:ThemeFileNord`... still work
+- ripgrep: live grep
+- fd: folder picker
+- tree-sitter-cli + a C compiler: syntax parsers install automatically when you open a file
+- node / npm: some language servers, copilot
+- lazygit: `<leader>gg`
 
 ## What's in it
 

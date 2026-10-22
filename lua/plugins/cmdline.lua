@@ -5,7 +5,7 @@ return {
         "MunifTanjim/nui.nvim",
     },
     config = function()
-        vim.cmd("source ~/.cache/wal/colors-wal.vim")
+        pcall(vim.cmd.source, vim.fn.expand("~/.cache/wal/colors-wal.vim")) -- optional, colors fall back below
         local color9 = vim.g.color9 or "#808080"
         local color5 = vim.g.color5 or "#ffffff"
 
