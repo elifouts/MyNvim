@@ -1,11 +1,9 @@
--- ~/.config/nvim/lua/plugins/alpha.lua
 return {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
         local dashboard = require("alpha.themes.dashboard")
 
-        -- Helper function for UTF-8 character lengths
         local function getCharLen(s, pos)
             local byte = string.byte(s, pos)
             if not byte then return nil end
@@ -16,7 +14,6 @@ return {
                 or 1
         end
 
-        -- Apply color highlights to logo
         local function applyColors(logo, colors, logoColors)
             dashboard.section.header.val = logo
 
@@ -67,7 +64,6 @@ return {
             pcall(vim.cmd, "AlphaRedraw")
         end
 
-        -- Dashboard header
         local opts = applyColors({
             [[███████╗    ██████╗ ]],
             [[██╔════╝    ██╔═══╝ ]],
@@ -92,7 +88,6 @@ return {
             [[d  d  d  e  e  e    ]],
         })
 
-        -- Dashboard buttons
         dashboard.section.buttons.val = {
             dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
             dashboard.button("f", "󰱼  > Find file", ":lua require('telescope.builtin').find_files({ hidden = true, no_ignore = true })<CR>"),
@@ -103,16 +98,13 @@ return {
             dashboard.button("q", "  > Quit", ":qa<CR>"),
         }
 
-        -- Hyprland settings shortcut, only on machines that have a hypr config
         if vim.fn.isdirectory(vim.fn.expand("~/.config/hypr")) == 1 then
             table.insert(dashboard.section.buttons.val, #dashboard.section.buttons.val,
                 dashboard.button("h", "  > Settings", ":cd ~/.config/hypr | Telescope find_files<CR>"))
         end
 
-        -- Footer
         dashboard.section.footer.val = { "", "Welcome!" }
 
-        -- Finally setup Alpha with the generated opts
         require("alpha").setup(opts)
         refresh_alpha_palette()
 

@@ -44,15 +44,19 @@ Leader key: `<Space>`
 - `<leader>fd`: Find diagnostics
 - `<leader>fD`: Find directory and `cd`
 
-## AI (CopilotChat)
+## AI (Claude)
 
 - Mode: normal
-- `<leader>ap`: Toggle CopilotChat right panel
-- `<leader>ao`: Open CopilotChat right panel
-- `<leader>ac`: Close CopilotChat panel
-- `<leader>ar`: Reset CopilotChat session
-- `<leader>as`: Stop CopilotChat response
-- `<leader>aa`: Authenticate Copilot
+- `<leader>ap`: Toggle Claude panel
+- `<leader>ao`: Focus Claude panel
+- `<leader>ar`: Resume a session
+- `<leader>ac`: Continue last session
+- `<leader>an`: Start a new session
+- `<leader>am`: Pick model
+- `<leader>ab`: Add current file
+- `<leader>aa`: Accept Claude diff
+- `<leader>ad`: Reject Claude diff
+- Visual `<leader>as`: Send selection to Claude
 
 ## LSP (buffer-local, active when an LSP attaches)
 
@@ -162,10 +166,8 @@ These are active on the Alpha dashboard page, not global normal-mode mappings.
 - `:Mason`
 - `:Typr`
 - `:TyprStats`
-- `:Copilot auth`
-- `:CopilotChat`
-- `:CopilotChatOpen`
-- `:CopilotChatToggle`
+- `:ClaudeCode`
+- `:ClaudeCodeFocus`
 - `:ThemePywal`
 - `:ThemeFileTokyo`
 - `:ThemeFileGruvbox`

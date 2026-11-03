@@ -1,6 +1,3 @@
--- treesitter.lua (main branch)
--- Highlighting + indent start for any filetype with a parser. Missing parsers install on
--- first open when tree-sitter-cli and a C compiler are available; otherwise nothing happens.
 return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
@@ -8,6 +5,7 @@ return {
     build = ":TSUpdate",
     config = function()
         local ts = require("nvim-treesitter")
+        -- Missing parsers install only when the CLI and a compiler are available.
         local can_install = vim.fn.executable("tree-sitter") == 1
             and (vim.fn.executable("cc") == 1 or vim.fn.executable("gcc") == 1 or vim.fn.executable("clang") == 1)
         local available
