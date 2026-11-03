@@ -15,6 +15,8 @@ My neovim config. pywal colors, lazy.nvim, and not much else in the way.
 
 ## Install
 
+Remove/backup your nvim config and run:
+
 ```sh
 git clone https://github.com/elifouts/MyNvim ~/.config/nvim
 nvim
